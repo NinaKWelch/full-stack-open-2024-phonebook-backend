@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/persons
+GET https://powerful-wave-75714-dbbc57a64b71.herokuapp.com/api/persons
