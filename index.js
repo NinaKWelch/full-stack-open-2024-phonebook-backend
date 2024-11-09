@@ -32,8 +32,9 @@ const generateId = () => {
 }
 
 app.use(express.json())
-app.use(morgan('tiny'))
+app.use(morgan('method :url :status :res[content-length] - :response-time ms :body'));
 
+morgan.token('body', (request) => JSON.stringify(request.body))
 
 app.get('/', (request, response) => {
   response.send('<h1>Phonebook API</h1>')
