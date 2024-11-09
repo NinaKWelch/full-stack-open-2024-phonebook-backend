@@ -1,7 +1,7 @@
 const express = require('express')
-const app = express()
+const morgan = require('morgan')
 
-app.use(express.json())
+const app = express()
 
 let persons = [
   { 
@@ -30,6 +30,9 @@ const generateId = () => {
   const id = Math.floor(Math.random() * 10000);
   return String(id)
 }
+
+app.use(express.json())
+app.use(morgan('tiny'))
 
 
 app.get('/', (request, response) => {
@@ -91,6 +94,13 @@ app.post('/api/persons', (request, response) => {
 
   response.json(person)
 })
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
+
 
 const PORT = 3001
 
