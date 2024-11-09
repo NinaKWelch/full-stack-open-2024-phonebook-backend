@@ -26,6 +26,11 @@ let persons = [
   }
 ]
 
+const generateId = () => {
+  const id = Math.floor(Math.random() * 10000);
+  return String(id)
+}
+
 
 app.get('/', (request, response) => {
   response.send('<h1>Phonebook API</h1>')
@@ -59,10 +64,29 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons', (request, response) => {
-  const id = Math.floor(Math.random() * 10000);
+  const { name = '', number = ''} = request.body
+  const isNameInPhoneBook = persons.find(person => person.name === name)
 
-  const person = request.body
-  person.id = String(id)
+  if (!name || !number) {
+    // calling return is crucial to stop the execution of the function
+    return response.status(400).json({ 
+      error: 'name or number missing' 
+    })
+  }
+
+  if (isNameInPhoneBook) {
+    return response.status(400).json({ 
+      error: 'name must be unique' 
+    })
+  }
+
+  const person = {
+    name,
+    number,
+    id: generateId(),
+  }
+
+  person.id = generateId()
   persons = persons.concat(person)
 
   response.json(person)
