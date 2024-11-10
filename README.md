@@ -42,3 +42,4 @@ npm run logs:prod
 
 - [VS Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 - [Deploy Your Application to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
+- [VS Code debugging documentation](https://code.visualstudio.com/docs/editor/debugging)
