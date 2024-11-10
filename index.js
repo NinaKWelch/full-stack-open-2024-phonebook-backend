@@ -18,12 +18,16 @@ app.get('/', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-  response.send(
-    `<div>
-      <p>Phonebook has info for ${persons.length} people</p>
-      <p>${new Date()}</p>
-    </div>`
-  )
+  const date = new Date()
+  
+  Person.find({}).then(persons => {
+    response.send(
+      `<div>
+        <p>Phonebook has info for ${persons.length} people</p>
+        <p>${date}</p>
+      </div>`
+    )
+  })
 })
 
 app.get('/api/persons', (request, response) => {
